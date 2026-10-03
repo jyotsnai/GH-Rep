@@ -1,0 +1,1 @@
+Replace the visual placeholders in the product cards/modal with real product photos when ready.
