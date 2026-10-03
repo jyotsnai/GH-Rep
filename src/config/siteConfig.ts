@@ -2,9 +2,9 @@ export const siteConfig = {
   brandName: "Moonlit Loops",
   subtitle: "by Jyotsna",
   creatorName: "Jyotsna",
-  tagline: "Handmade crochet, one thoughtful loop at a time.",
-  whatsappNumber: "", // Add Jyotsna's WhatsApp number in international format, digits only.
-  whatsappDisplay: "",
+  tagline: "Young hands. Big imagination. Beautiful crochet.",
+  whatsappNumber: "919764006232",
+  whatsappDisplay: "+91 97640 06232",
   email: "moonlitloopsbyjyotsna@gmail.com",
   instagramHandle: "",
   instagramUrl: "",

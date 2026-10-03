@@ -3,6 +3,7 @@ import { Product } from '../types';
 export const products: Product[] = [
   {
     "id": "p01",
+    "photo": "/photos/jyotsna-with-crochet.jpg",
     "name": "Hooded Scarf",
     "slug": "hooded-scarf",
     "category": "Wearables",
@@ -13,6 +14,7 @@ export const products: Product[] = [
   },
   {
     "id": "p02",
+    "photo": "/photos/jyotsna-crochet-2.jpg",
     "name": "Scarves",
     "slug": "scarves",
     "category": "Accessories",
@@ -33,6 +35,7 @@ export const products: Product[] = [
   },
   {
     "id": "p05",
+    "photo": "/photos/jyotsna-with-crochet.jpg",
     "name": "Tops - Tubetops, Haltertops",
     "slug": "tops-tubetops-haltertops",
     "category": "Wearables",
@@ -73,6 +76,7 @@ export const products: Product[] = [
   },
   {
     "id": "p09",
+    "photo": "/photos/bouquet.jpg",
     "name": "Bouquet",
     "slug": "bouquet",
     "category": "Flowers & Gifting",

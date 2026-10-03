@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ChevronDown, Heart, Instagram, Mail, Menu, Minus, Plus, Search, ShoppingBag, Sparkles, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Heart, Instagram, Mail, Menu, Minus, Plus, Search, ShoppingBag, Sparkles, X, MessageCircle, GraduationCap, BookOpen, Gift, Truck, Leaf } from "lucide-react";
 import { siteConfig } from "./config/siteConfig";
 import { Product } from "./types";
 import { products } from "./data/products";
@@ -83,8 +83,10 @@ function App() {
         </button>
         <nav className={menu ? "nav open":"nav"}>
           {["home","shop","custom","about","faq","contact"].map(x=>
-            <button key={x} className={view===x?"active":""} onClick={()=>go(x)}>{x==="faq"?"FAQ":x[0].toUpperCase()+x.slice(1)}</button>
+            <button key={x} className={view===x?"active":""} onClick={()=>go(x)}>{x==="faq"?"FAQ":x==="custom"?"Custom Orders":x[0].toUpperCase()+x.slice(1)}</button>
           )}
+          <button onClick={()=>window.scrollTo({top:document.body.scrollHeight/3,behavior:"smooth"})} className="navSoon">Digital Patterns <span>Soon</span></button>
+          <button onClick={()=>window.scrollTo({top:document.body.scrollHeight/3,behavior:"smooth"})} className="navSoon">Crochet Coaching <span>Soon</span></button>
         </nav>
         <div className="headerActions">
           <button className="iconBtn" onClick={()=>setSearch(s=>s ? "":" ")} aria-label="Search"><Search size={20}/></button>
@@ -119,35 +121,59 @@ function App() {
 
 function Home({go,add,setSelected}:{go:(s:string)=>void,add:(p:Product)=>void,setSelected:(p:Product)=>void}) {
   const featured = products.filter(p=>p.status!=="Coming soon").slice(0,8);
+  const categories = [
+    {name:"Clothes & Accessories", sub:"Tops, scarves, cardigans, beanies & more", img:"/categories/clothes.jpg"},
+    {name:"Pillows & Blankets", sub:"Cushions, throws & cozy creations", img:"/categories/pillows.jpg"},
+    {name:"Bags, Holders & Scrunchies", sub:"Totes, pouches, wallets, mobile holders & more", img:"/categories/bags.jpg"},
+    {name:"Bouquets, Flowers & Coasters", sub:"Bouquets, crochet flowers, coasters & table runners", img:"/categories/flowers.jpg"},
+    {name:"Crochet for Pets", sub:"Pet blankets, sweaters, harnesses & cozy wear", img:"/categories/pets.jpg"},
+    {name:"Keychains & Soft Toys", sub:"Keychains, bracelets, soft toys & handmade treasures", img:"/categories/toys.jpg"},
+  ];
+  const notify = (message:string) => {
+    if (!siteConfig.whatsappNumber) return;
+    window.open(`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+  };
   return <main>
-    <section className="hero">
-      <div className="heroCopy">
-        <div className="eyebrow"><Sparkles size={15}/> Handmade in Pune</div>
-        <h1>Little loops.<br/><em>Big heart.</em></h1>
-        <p>Thoughtfully crocheted pieces for everyday life, gifting and the little moments that deserve something made by hand.</p>
-        <div className="heroBtns"><button className="primary" onClick={()=>go("shop")}>Explore the collection <ArrowRight size={18}/></button><button className="secondary" onClick={()=>go("custom")}>Have an idea?</button></div>
-        <div className="trust"><span>✓ Made to order</span><span>✓ India-first</span><span>✓ Personal service</span></div>
+    <section className="heroHero">
+      <div className="heroHeroCopy">
+        <div className="brandCrescent"><span>☾</span><small>handmade under the stars</small></div>
+        <p className="heroKicker">MOONLIT LOOPS <em>by Jyotsna</em></p>
+        <h1>Young hands.<br/><em>Big imagination.</em><br/><span>Beautiful crochet.</span></h1>
+        <p className="heroLead">Handmade crochet creations made with care, made to order in Pune — from little treasures to thoughtful gifts and everyday favourites.</p>
+        <div className="heroBtns"><button className="primary heroPrimary" onClick={()=>go("shop")}><ShoppingBag size={18}/> Shop Crochet <ArrowRight size={18}/></button><button className="secondary heroSecondary" onClick={()=>go("custom")}><Heart size={18}/> Custom Order <ArrowRight size={18}/></button></div>
+        <div className="trust heroTrust"><span><Heart size={16}/> Handmade with love</span><span><Leaf size={16}/> Made to order</span><span><Truck size={16}/> India-wide delivery</span><span><Gift size={16}/> Perfect for gifting</span></div>
       </div>
-      <div className="heroVisual"><div className="photoPlaceholder large"><span>PHOTO</span><strong>Jyotsna's crochet world</strong><small>Real product photography coming soon</small></div></div>
+      <div className="heroHeroVisual">
+        <div className="heroBrandVisual">
+          <img src="/brand/moon-hook.jpg" alt="Moonlit Loops moon and crochet hook artwork"/>
+          <div className="heroPhotoNote"><span>JYOTSNA'S PHOTO COMING SOON</span><strong>We will use her actual photograph here.</strong><small>No AI-generated likeness will be used as her final creator photo.</small></div>
+        </div>
+      </div>
     </section>
 
-    <section className="intro section">
-      <div><p className="eyebrow">THE MOONLIT WAY</p><h2>Made slowly.<br/><em>Made for you.</em></h2></div>
-      <div className="introText"><p>Moonlit Loops is Jyotsna's little crochet studio — a place where yarn, colour and patience turn into gifts, accessories, home pieces and keepsakes.</p><button className="textLink" onClick={()=>go("about")}>Read our story <ArrowRight size={16}/></button></div>
+    <section className="categorySection section">
+      <div className="categoryIntro"><p className="eyebrow">THE MOONLIT COLLECTION</p><h2>What can Moonlit Loops make?</h2><p>Explore handmade crochet creations across different categories.</p></div>
+      <div className="categoryGrid">{categories.map(c=><button className="categoryCard" key={c.name} onClick={()=>go("shop")}><img src={c.img} alt=""/><div><h3>{c.name}</h3><p>{c.sub}</p><span>Shop Now <ArrowRight size={15}/></span></div></button>)}</div>
     </section>
 
-    <section className="section">
-      <div className="sectionHead"><div><p className="eyebrow">THE COLLECTION</p><h2>Start with something lovely.</h2></div><button className="textLink" onClick={()=>go("shop")}>View all <ArrowRight size={16}/></button></div>
-      <div className="productGrid">{featured.map(p=><Card key={p.id} product={p} add={add} select={setSelected}/>)}</div>
+    <section className="engageSection">
+      <div className="sectionHead centered"><div><p className="eyebrow">COMING SOON</p><h2>More ways to engage with Moonlit Loops</h2><p>New ways to learn, create and connect are on the way.</p></div></div>
+      <div className="engageGrid">
+        <article className="engageCard lavender"><div className="engageIcon"><BookOpen size={34}/></div><div><span className="soonBadge">COMING SOON</span><h3>Digital Crochet Patterns</h3><p>Step-by-step patterns to make your own crochet creations — for beginners and crochet lovers.</p><button className="outline" onClick={()=>notify("Hi Jyotsna! I'm interested in the upcoming Moonlit Loops digital crochet patterns. Please let me know when they launch.")}>Notify Me <ArrowRight size={15}/></button></div></article>
+        <article className="engageCard pink"><div className="engageIcon"><GraduationCap size={38}/></div><div><span className="soonBadge">COMING SOON</span><h3>Crochet Coaching</h3><p>Learn, create and grow with Jyotsna. Online and in Pune — details coming soon.</p><button className="outline" onClick={()=>notify("Hi Jyotsna! I'm interested in the upcoming Moonlit Loops crochet coaching. Please let me know when it launches.")}>I'm Interested <ArrowRight size={15}/></button></div></article>
+      </div>
     </section>
 
-    <section className="orderStrip">
-      <div><p className="eyebrow">SOMETHING IN MIND?</p><h2>Tell Jyotsna what you’re imagining.</h2><p>Colours, gifts, special occasions, a favourite idea — custom requests are welcome.</p></div>
-      <button className="primary light" onClick={()=>go("custom")}>Start a custom request <ArrowRight size={18}/></button>
+    <section className="creatorSection section">
+      <div className="creatorPhoto realPhotoPlaceholder small"><img src="/photos/jyotsna-portrait.jpg" alt="Jyotsna with her crochet creations"/></div>
+      <div className="creatorCopy"><p className="eyebrow">MEET JYOTSNA</p><h2>A young creator with a love for crochet.</h2><p>Moonlit Loops began with Jyotsna turning simple loops of yarn into something colourful, useful and uniquely yours. Every piece is made with care, creativity and a lot of heart.</p><p>Her crochet journey is still growing — one loop, one idea and one creation at a time.</p><div className="signature">— Jyotsna ♡</div></div>
     </section>
+
+    <section className="section featuredHome"><div className="sectionHead"><div><p className="eyebrow">SHOP HANDMADE</p><h2>Start with something lovely.</h2></div><button className="textLink" onClick={()=>go("shop")}>View all <ArrowRight size={16}/></button></div><div className="productGrid">{featured.map(p=><Card key={p.id} product={p} add={add} select={setSelected}/>)}</div></section>
+
+    <section className="finalCta"><div><p className="eyebrow">READY WHEN YOU ARE?</p><h2>Find your next handmade favourite.</h2><p>Shop the collection, dream up something custom, or simply say hello.</p></div><div className="finalBtns"><button className="primary light" onClick={()=>go("shop")}><ShoppingBag size={18}/> Shop Crochet</button><button className="secondary lightBorder" onClick={()=>go("custom")}><Heart size={18}/> Custom Order</button><button className="whatsappBtn" onClick={()=>notify("Hi Jyotsna! I'd like to know more about Moonlit Loops.")}><MessageCircle size={18}/> Chat on WhatsApp</button></div></section>
   </main>
 }
-
 function Shop({filtered,categories,category,setCategory,search,setSelected,add}:any) {
   return <main className="section shopPage">
     <div className="pageIntro"><p className="eyebrow">SHOP HANDMADE</p><h1>Made to order, <em>not mass produced.</em></h1><p>Browse the current launch collection. Every item is prepared by Jyotsna after your order is confirmed.</p></div>
@@ -159,13 +185,13 @@ function Shop({filtered,categories,category,setCategory,search,setSelected,add}:
 
 function Card({product,add,select}:{product:Product,add:(p:Product)=>void,select:(p:Product)=>void}) {
   return <article className="card">
-    <button className="cardImage" onClick={()=>select(product)}><span>PHOTO COMING SOON</span><small>Moonlit Loops</small></button>
+    <button className="cardImage" onClick={()=>select(product)}>{product.photo ? <img src={product.photo} alt={product.name}/> : <><span>PHOTO COMING SOON</span><small>Moonlit Loops</small></>}</button>
     <div className="cardBody"><div className="cardMeta"><span>{product.category}</span><Heart size={17}/></div><h3>{product.name}</h3><p>{product.description}</p><div className="price">{money(product.price)} <small>starting</small></div><div className="cardFoot"><span className="made">{product.status}</span>{product.status==="Coming soon" ? <button className="outline" onClick={()=>select(product)}>Details</button> : <button className="outline" onClick={()=>add(product)}>Add to bag</button>}</div></div>
   </article>
 }
 
 function ProductModal({product,add,close}:{product:Product,add:(p:Product)=>void,close:()=>void}) {
- return <div className="overlay" onMouseDown={e=>e.target===e.currentTarget&&close()}><div className="modal"><button className="close" onClick={close}><X/></button><div className="modalPhoto photoPlaceholder"><span>PHOTO COMING SOON</span></div><div className="modalBody"><p className="eyebrow">{product.category}</p><h2>{product.name}</h2><div className="price big">{money(product.price)} <small>starting</small></div><p>{product.description}</p><div className="detailBox"><strong>Made to order</strong><span>Final colour, size, materials and timeline are confirmed with you before payment.</span></div><p className="muted">{product.note}</p>{product.status!=="Coming soon" && <button className="primary full" onClick={()=>{add(product);close()}}>Add to bag</button>}</div></div></div>
+ return <div className="overlay" onMouseDown={e=>e.target===e.currentTarget&&close()}><div className="modal"><button className="close" onClick={close}><X/></button><div className="modalPhoto photoPlaceholder">{product.photo ? <img src={product.photo} alt={product.name}/> : <span>PHOTO COMING SOON</span>}</div><div className="modalBody"><p className="eyebrow">{product.category}</p><h2>{product.name}</h2><div className="price big">{money(product.price)} <small>starting</small></div><p>{product.description}</p><div className="detailBox"><strong>Made to order</strong><span>Final colour, size, materials and timeline are confirmed with you before payment.</span></div><p className="muted">{product.note}</p>{product.status!=="Coming soon" && <button className="primary full" onClick={()=>{add(product);close()}}>Add to bag</button>}</div></div></div>
 }
 
 function Cart({cart,subtotal,changeQty,remove,order,close}:any) {
@@ -179,7 +205,7 @@ function Custom({whatsapp,sent,setSent}:{whatsapp:(s:string)=>void,sent:boolean,
 }
 
 function About({go}:{go:(s:string)=>void}) {
- return <main className="section narrow"><div className="pageIntro"><p className="eyebrow">OUR STORY</p><h1>A small studio with <em>a lot of loops.</em></h1><p>Moonlit Loops by Jyotsna began with a simple idea: make beautiful things slowly, learn the craft properly, and let each piece have its own personality.</p></div><div className="story"><div className="photoPlaceholder tall"><span>PHOTO</span><small>Studio / Jyotsna photo coming later</small></div><div><h2>Made by hand, not by a machine.</h2><p>Every piece starts with yarn, a hook and time. Some designs are quick little gifts; others take many hours. That is why Moonlit Loops works primarily on a made-to-order basis.</p><p>We are starting in India, learning what customers love, refining quality and packaging, and building the brand one order at a time.</p><div className="values"><div><strong>01</strong><span>Thoughtful</span></div><div><strong>02</strong><span>Handmade</span></div><div><strong>03</strong><span>Personal</span></div></div></div></div><div className="noteBlock"><Sparkles/><div><strong>Why made to order?</strong><p>It lets Jyotsna make each piece for its owner instead of holding large amounts of ready stock. It also means colours, size and small details can often be discussed before the order is confirmed.</p></div></div><button className="textLink" onClick={()=>go("shop")}>Explore the collection <ArrowRight size={16}/></button></main>
+ return <main className="section narrow"><div className="pageIntro"><p className="eyebrow">OUR STORY</p><h1>A small studio with <em>a lot of loops.</em></h1><p>Moonlit Loops by Jyotsna began with a simple idea: make beautiful things slowly, learn the craft properly, and let each piece have its own personality.</p></div><div className="story"><div className="creatorPhoto tall"><img src="/photos/jyotsna-portrait.jpg" alt="Jyotsna with her crochet creations"/></div><div><h2>Made by hand, not by a machine.</h2><p>Every piece starts with yarn, a hook and time. Some designs are quick little gifts; others take many hours. That is why Moonlit Loops works primarily on a made-to-order basis.</p><p>We are starting in India, learning what customers love, refining quality and packaging, and building the brand one order at a time.</p><div className="values"><div><strong>01</strong><span>Thoughtful</span></div><div><strong>02</strong><span>Handmade</span></div><div><strong>03</strong><span>Personal</span></div></div></div></div><div className="noteBlock"><Sparkles/><div><strong>Why made to order?</strong><p>It lets Jyotsna make each piece for its owner instead of holding large amounts of ready stock. It also means colours, size and small details can often be discussed before the order is confirmed.</p></div></div><button className="textLink" onClick={()=>go("shop")}>Explore the collection <ArrowRight size={16}/></button></main>
 }
 
 function FAQ() {

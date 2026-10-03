@@ -7,4 +7,5 @@ export type Product = {
   status: string;
   note: string;
   description: string;
+  photo?: string;
 };
