@@ -120,7 +120,8 @@ function App() {
 }
 
 function Home({go,add,setSelected}:{go:(s:string)=>void,add:(p:Product)=>void,setSelected:(p:Product)=>void}) {
-  const featured = products.filter(p=>p.status!=="Coming soon").slice(0,8);
+  const featuredIds = ["p26", "p09", "p47", "p05", "p11", "p14", "p23", "p10"];
+  const featured = featuredIds.map(id=>products.find(p=>p.id===id)).filter((p): p is Product => Boolean(p) && p.status!=="Coming soon");
   const categories = [
     {name:"Clothes & Accessories", sub:"Tops, scarves, cardigans, beanies & more", img:"/categories/clothes.jpg"},
     {name:"Pillows & Blankets", sub:"Cushions, throws & cozy creations", img:"/categories/pillows.jpg"},
@@ -145,8 +146,8 @@ function Home({go,add,setSelected}:{go:(s:string)=>void,add:(p:Product)=>void,se
       </div>
       <div className="heroHeroVisual">
         <div className="heroBrandVisual">
-          <img src="/brand/moon-hook.jpg" alt="Moonlit Loops moon and crochet hook artwork"/>
-          <div className="heroPhotoNote"><span>JYOTSNA'S PHOTO COMING SOON</span><strong>We will use her actual photograph here.</strong><small>No AI-generated likeness will be used as her final creator photo.</small></div>
+          <img src="/photos/bouquet.jpg" alt="Crochet bouquet made by Jyotsna"/>
+          <div className="heroPhotoNote"><span>MADE BY JYOTSNA</span><strong>A real crochet creation.</strong><small>Real work. Real hands. No AI-generated product imagery.</small></div>
         </div>
       </div>
     </section>

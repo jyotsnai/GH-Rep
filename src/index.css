@@ -30,3 +30,26 @@
 .heroBrandVisual{width:min(100%,560px);height:540px;border-radius:36px;overflow:hidden;background:linear-gradient(145deg,#06162f,#152e50);box-shadow:0 30px 70px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.heroBrandVisual img{width:88%;height:62%;object-fit:cover;object-position:center top;border-radius:24px;filter:saturate(.98)}.heroPhotoNote{text-align:center;padding:18px 20px}.heroPhotoNote span{font-size:9px;letter-spacing:.18em;font-weight:800;color:#f39ac0}.heroPhotoNote strong{display:block;font-family:"Cormorant Garamond";font-size:25px;color:#fff0cc;margin:5px 0}.heroPhotoNote small{display:block;max-width:340px;color:#c9d4e3;font-size:10px;line-height:1.45}.creatorPhoto{background:linear-gradient(145deg,#f8efe7,#e8d6e7)}
 @media(max-width:720px){.heroBrandVisual{height:360px}.heroBrandVisual img{height:55%}}
 .cardImage{padding:0;overflow:hidden;position:relative}.cardImage img{width:100%;height:100%;object-fit:cover;display:block}.modalPhoto{overflow:hidden}.modalPhoto img{width:100%;height:100%;object-fit:cover;display:block}.creatorPhoto{overflow:hidden;background:#f8efe7}.creatorPhoto img{width:100%;height:100%;object-fit:cover;display:block}
+
+
+/* V4 preview corrections: compact first viewport + never crop real product photos */
+.heroHero{min-height:470px;}
+.heroHeroCopy{padding:44px clamp(24px,6vw,80px) 38px;}
+.brandCrescent{margin-bottom:10px;}
+.brandCrescent span{font-size:38px;}
+.heroKicker{font-size:20px;margin-bottom:10px;}
+.heroHero h1{font-size:clamp(48px,5.2vw,68px);margin-bottom:16px;}
+.heroLead{font-size:15px;line-height:1.5;margin-bottom:20px;max-width:590px;}
+.heroTrust{margin-top:18px;gap:14px;}
+.heroHeroVisual{min-height:470px;padding:24px;}
+.heroBrandVisual{height:410px;max-width:500px;}
+.heroBrandVisual img{width:100%;height:68%;object-fit:contain;object-position:center;background:#f8efe7;border-radius:24px;}
+.heroPhotoNote{padding:10px 16px;}
+.heroPhotoNote strong{font-size:22px;margin:3px 0;}
+.heroPhotoNote small{font-size:10px;}
+.categoryCard img{object-fit:contain;background:#f8efe7;}
+.cardImage img,.modalPhoto img,.creatorPhoto img{object-fit:contain;background:#f8efe7;}
+.cardImage{height:300px;background:#f8efe7;}
+@media(max-width:1100px){.heroHero{min-height:0;}.heroHeroCopy{padding-top:42px;}.heroHeroVisual{min-height:390px;}.heroBrandVisual{height:350px;}}
+@media(max-width:720px){.heroHeroCopy{padding:38px 20px 24px;}.heroHero h1{font-size:54px;line-height:.9;}.heroLead{font-size:14px;}.heroHeroVisual{min-height:330px;padding:18px;}.heroBrandVisual{height:300px;}.heroBrandVisual img{height:64%;}.cardImage{height:230px;}}
+@media(max-width:430px){.heroHero h1{font-size:48px;}.heroTrust span{font-size:10px;}.heroBrandVisual{height:280px;}.cardImage{height:270px;}}
